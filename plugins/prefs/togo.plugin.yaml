@@ -1,0 +1,16 @@
+name: prefs
+description: A togo prefs plugin (backend + frontend), also an OS app.
+priority: 50
+backend:
+  package: github.com/togo-framework/os-example/plugins/prefs
+frontend:
+  dir: web
+commands: []
+os:
+  icon: settings
+  color: "#64748b"
+  category: system
+  window:
+    width: 800
+    height: 600
+    resizable: true

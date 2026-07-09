@@ -1,0 +1,23 @@
+# Secrets / local config
+.env
+.env.local
+*.local
+
+# Databases / build artifacts
+*.db
+*.db-shm
+*.db-wal
+/bin/
+/tmp/
+*.test
+*.out
+
+# Node
+node_modules/
+web/node_modules/
+web/dist/
+web/.vite/
+.vite/
+
+# Editor / OS
+.DS_Store
