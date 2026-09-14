@@ -38,8 +38,8 @@ export function WeatherApp() {
 
   const Icon = ICONS[data.condition] ?? Cloud;
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-3 bg-gradient-to-b from-sky-500/10 to-transparent p-8 text-center">
-      <Icon className="h-20 w-20 text-sky-500" strokeWidth={1.5} />
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-8 text-center">
+      <Icon className="h-20 w-20 text-primary" strokeWidth={1.5} />
       <div className="text-5xl font-semibold tabular-nums">{Math.round(data.temp)}°</div>
       <div className="text-lg font-medium">{data.location}</div>
       <div className="text-sm capitalize text-muted-foreground">{data.condition}</div>

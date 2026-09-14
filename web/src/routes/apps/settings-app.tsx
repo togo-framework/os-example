@@ -179,10 +179,10 @@ function Appearance() {
               key={t.id}
               onClick={() => setThemeId(t.id)}
               className={
-                "flex items-center gap-3 rounded-xl border p-3 text-start transition " +
+                "flex items-center gap-3 rounded-md border p-3 text-start transition-colors " +
                 (active ? "" : "border-border/50 hover:border-border")
               }
-              style={active ? { borderColor: t.accent, boxShadow: `0 0 0 1px ${t.accent}` } : undefined}
+              style={active ? { borderColor: t.accent, outline: `1px solid ${t.accent}` } : undefined}
             >
               <span className="h-8 w-8 shrink-0 rounded-full" style={{ background: t.accent }} />
               <span className="flex flex-col">
@@ -207,7 +207,7 @@ function WallpaperGrid({ current, onPick }: { current: string; onPick: (id: stri
         return (
           <button key={w.id} onClick={() => onPick(w.id)} className="flex flex-col items-center gap-1.5">
             <span
-              className="relative h-24 w-full rounded-xl border-2 shadow-sm transition"
+              className="relative h-24 w-full border-2 transition-colors"
               style={{ background: bg, borderColor: selected ? "var(--primary)" : "transparent" }}
             >
               {selected && (
@@ -246,10 +246,10 @@ function LockScreen({ current }: { current: string }) {
 
       {/* Live preview of the lock screen */}
       <div
-        className="mb-5 flex h-40 w-full items-center justify-center rounded-2xl border border-border shadow-inner"
+        className="mb-5 flex h-40 w-full items-center justify-center border border-border"
         style={{ background: previewBg }}
       >
-        <div className="flex flex-col items-center gap-2 rounded-2xl border border-white/20 bg-black/25 px-6 py-4 backdrop-blur-md">
+        <div className="flex flex-col items-center gap-2 border border-white/20 bg-black/50 px-6 py-4">
           <span className="h-10 w-10 rounded-full bg-white/80" />
           <span className="text-xs font-medium text-white">Sign in to {APP_NAME}</span>
         </div>
@@ -263,7 +263,7 @@ function LockScreen({ current }: { current: string }) {
 function About() {
   return (
     <section className="flex flex-col items-center gap-3 py-8 text-center">
-      <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-primary/10 text-primary">
+      <div className="flex h-20 w-20 items-center justify-center border border-border bg-primary/10 text-primary">
         <Info className="h-9 w-9" />
       </div>
       <h2 className="text-xl font-semibold">{APP_NAME}</h2>

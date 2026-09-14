@@ -131,7 +131,7 @@ function AboutDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-sm text-center">
         <DialogHeader>
-          <div className="mx-auto mb-2 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <div className="mx-auto mb-2 flex h-14 w-14 items-center justify-center border border-border bg-primary/10 text-primary">
             <Layers className="h-7 w-7" />
           </div>
           <DialogTitle>About {APP_NAME}</DialogTitle>

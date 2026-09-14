@@ -12,10 +12,10 @@ export function OSLoader() {
     >
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div className="relative z-10 flex flex-col items-center gap-5 text-white">
-        <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-white/25 bg-white/10 shadow-2xl backdrop-blur-xl">
+        <div className="flex h-20 w-20 items-center justify-center border border-white/25 bg-black/40">
           <Layers className="h-10 w-10" strokeWidth={1.5} />
         </div>
-        <span className="h-6 w-6 animate-spin rounded-full border-2 border-white/30 border-t-white" aria-label="Loading" />
+        <span className="h-1 w-24 animate-pulse bg-white/70" role="status" aria-label="Loading" />
       </div>
     </div>
   );
