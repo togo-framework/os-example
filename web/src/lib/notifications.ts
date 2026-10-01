@@ -1,6 +1,6 @@
 // Client for the notification-center plugin's /api/notifications* endpoints.
 import { API } from "./api";
-import type { OSNotification } from "@togo-framework/ui";
+import type { OSNotification } from "./os-kit";
 
 async function req<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API}/api/notifications${path}`, { credentials: "include", ...init });

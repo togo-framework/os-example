@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Palette, Image as ImageIcon, Lock, Info, Search, Check, ChevronRight, ChevronLeft } from "lucide-react";
-import { wallpapers, wallpaperSwatch, themes, useTheme, useWindowSection } from "@togo-framework/ui";
+import { useNasaq, wallpaperCss } from "@fadymondy/nasaq/web";
+import { useWindowSection } from "../../components/os/DesktopShell";
+import { wallpapers } from "../../lib/os-kit";
 import { useOS } from "../../lib/os-context";
 import { APP_NAME } from "../../lib/api";
 
@@ -164,8 +166,14 @@ function NavButton({ item, active, onClick, showChevron }: { item: NavItem; acti
   );
 }
 
+// Nasaq has light and dark; the accent follows the ToGO brand.
+const themes = [
+  { id: "dark", label: "Dark", base: "dark", accent: "#1F8A99" },
+  { id: "light", label: "Light", base: "light", accent: "#1F8A99" },
+];
+
 function Appearance() {
-  const { theme } = useTheme();
+  const { resolvedTheme: theme } = useNasaq();
   const { setThemeId } = useOS();
   return (
     <section>
@@ -203,7 +211,7 @@ function WallpaperGrid({ current, onPick }: { current: string; onPick: (id: stri
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
       {wallpapers.map((w) => {
         const selected = current === w.id;
-        const bg = w.image ? `url("${w.image}") center/cover, ${wallpaperSwatch(w.id)}` : wallpaperSwatch(w.id);
+        const bg = wallpaperCss(w.background);
         return (
           <button key={w.id} onClick={() => onPick(w.id)} className="flex flex-col items-center gap-1.5">
             <span
@@ -238,7 +246,7 @@ function Wallpaper({ current }: { current: string }) {
 function LockScreen({ current }: { current: string }) {
   const { setLockWallpaper } = useOS();
   const active = wallpapers.find((w) => w.id === current) ?? wallpapers[0];
-  const previewBg = active.image ? `url("${active.image}") center/cover, ${wallpaperSwatch(active.id)}` : wallpaperSwatch(active.id);
+  const previewBg = wallpaperCss(active.background);
   return (
     <section>
       <h2 className="text-lg font-semibold">Lock Screen</h2>

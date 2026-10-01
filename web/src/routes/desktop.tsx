@@ -1,19 +1,15 @@
 import { useEffect, useRef, useState, type JSX } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Layers, Trash2 } from "lucide-react";
+import { Layers } from "lucide-react";
 import {
-  DesktopShell,
-  useOSApps,
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  type OSApp,
-  type OSNotification,
-  type WeatherData,
-  type DesktopApi,
-} from "@togo-framework/ui";
+} from "@fadymondy/nasaq/web";
+import { DesktopShell, type DesktopApi } from "../components/os/DesktopShell";
+import { useOSApps, type OSApp, type OSNotification, type WeatherData } from "../lib/os-kit";
 import { auth, clearSession, type Me } from "../lib/auth";
 import { notifications as notifApi } from "../lib/notifications";
 import { API, APP_NAME } from "../lib/api";
@@ -40,15 +36,13 @@ export default function Desktop() {
 
 function DesktopInner() {
   const nav = useNavigate();
-  const { prefs, setIconPosition, setDockPinned, setDesktopHidden } = useOS();
+  const { prefs, setIconPosition, setDockPinned } = useOS();
   const { apps } = useOSApps();
 
   // Effective dock = explicit pin list, or every app when nothing is pinned yet.
   const effectiveDock = () => (prefs.dock_pinned.length > 0 ? prefs.dock_pinned : apps.map((a) => a.slug));
   const pinDock = (slug: string) => { const d = effectiveDock(); if (!d.includes(slug)) setDockPinned([...d, slug]); };
   const unpinDock = (slug: string) => setDockPinned(effectiveDock().filter((s) => s !== slug));
-  const hideDesktop = (slug: string) => { if (!prefs.desktop_hidden.includes(slug)) setDesktopHidden([...prefs.desktop_hidden, slug]); };
-  const showDesktop = (slug: string) => setDesktopHidden(prefs.desktop_hidden.filter((s) => s !== slug));
   const [me, setMe] = useState<Me | null>(null);
   const [items, setItems] = useState<OSNotification[]>([]);
   const [unread, setUnread] = useState(0);
@@ -77,7 +71,7 @@ function DesktopInner() {
 
   function renderApp(app: OSApp) {
     const Content = WINDOW_CONTENT[app.slug];
-    return Content ? <Content /> : <div className="p-6 text-sm text-muted-foreground">No window for "{app.slug}".</div>;
+    return Content ? <Content /> : <div className="p-6 text-sm text-muted-foreground">No window for &quot;{app.slug}&quot;.</div>;
   }
 
   function openTrash() {
@@ -91,11 +85,7 @@ function DesktopInner() {
         apps={apps}
         renderApp={renderApp}
         onReady={(api) => { desktopRef.current = api; }}
-        iconPositions={prefs.icon_positions}
         onIconMove={setIconPosition}
-        desktopHidden={prefs.desktop_hidden}
-        onRemoveDesktopIcon={hideDesktop}
-        onAddDesktopIcon={showDesktop}
         onPinDock={pinDock}
         onUnpinDock={unpinDock}
         notifications={items}
@@ -113,12 +103,10 @@ function DesktopInner() {
           onLogout: doLogout,
           weather,
           onWeatherClick: () => openApp("weather"),
-          menu: {
-            label: APP_NAME,
-            logo: <Layers className="h-4 w-4" />,
-            onAbout: () => setAboutOpen(true),
-            onSettings: () => openApp("prefs"),
-          },
+          label: APP_NAME,
+          logo: <Layers className="h-4 w-4" />,
+          onAbout: () => setAboutOpen(true),
+          onSettings: () => openApp("prefs"),
         }}
       />
       <AboutDialog open={aboutOpen} onOpenChange={setAboutOpen} />

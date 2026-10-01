@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StickyNote } from "lucide-react";
-import { WindowSpinner } from "@togo-framework/ui";
+import { Spinner } from "@fadymondy/nasaq/web";
 import { API } from "../../lib/api";
 
 // Window content for the "notes" OS app (plugins/notes). The plugin ships a
@@ -16,7 +16,7 @@ export function NotesApp() {
       .catch(() => setStatus("error"));
   }, []);
 
-  if (status === null) return <WindowSpinner />;
+  if (status === null) return <div className="flex h-full items-center justify-center"><Spinner label="Loading" className="h-6 w-6" /></div>;
 
   return (
     <div className="flex h-full flex-col">

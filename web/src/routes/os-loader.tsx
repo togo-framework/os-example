@@ -1,14 +1,14 @@
 import { Layers } from "lucide-react";
-import { wallpaperCss } from "@togo-framework/ui";
+import { wallpaperCss } from "@fadymondy/nasaq/web";
+import { wallpaperById } from "../lib/os-kit";
 
 // OS-style boot/transition loader — shown by the router while a route's
-// beforeLoad guard runs or a lazy chunk loads. Replaces the Sentra-branded
-// SentraLoading so the loading state matches the desktop OS look.
+// beforeLoad guard runs or a lazy chunk loads. Matches the desktop OS look.
 export function OSLoader() {
   return (
     <div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-6"
-      style={{ background: wallpaperCss("aurora") }}
+      style={{ background: wallpaperCss(wallpaperById("aurora").background) }}
     >
       <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
       <div className="relative z-10 flex flex-col items-center gap-5 text-white">

@@ -12,7 +12,7 @@ const Desktop = lazyRouteComponent(() => import("./routes/desktop"));
 // The authenticated admin surface (dashboard charts/widgets/ThemePicker, the
 // resource tables/forms/infolists) is the heavy part of the bundle — lazy-load it
 // so it splits into its own chunk and the public/auth first paint stays small.
-// The router's pending component (SentraLoading) shows while the chunk loads.
+// The router's pending component (OSLoader) shows while the chunk loads.
 const Dashboard = lazyRouteComponent(() => import("./routes/dashboard"), "Dashboard");
 const AdminHome = lazyRouteComponent(() => import("./routes/admin"), "AdminHome");
 const AdminResource = lazyRouteComponent(() => import("./routes/admin-resource"), "AdminResource");

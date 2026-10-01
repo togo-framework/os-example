@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Cloud, CloudRain, CloudSnow, CloudLightning, Sun, CloudSun, CloudFog, Wind } from "lucide-react";
-import { WindowSpinner } from "@togo-framework/ui";
+import { Spinner } from "@fadymondy/nasaq/web";
 import { API } from "../../lib/api";
 
 interface Current {
@@ -34,7 +34,7 @@ export function WeatherApp() {
   }, []);
 
   if (err) return <div className="flex h-full items-center justify-center text-sm text-muted-foreground">Couldn't load weather.</div>;
-  if (!data) return <WindowSpinner />;
+  if (!data) return <div className="flex h-full items-center justify-center"><Spinner label="Loading" className="h-6 w-6" /></div>;
 
   const Icon = ICONS[data.condition] ?? Cloud;
   return (

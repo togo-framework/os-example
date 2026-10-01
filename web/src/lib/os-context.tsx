@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { useTheme, type DesktopPrefs } from "@togo-framework/ui";
+import { useNasaq } from "@fadymondy/nasaq/web";
 import { API } from "./api";
+import type { DesktopPrefs } from "./os-kit";
 
 // Shared desktop-preferences state for the whole OS session. Both the desktop
 // shell (background) and the Settings window read/write the SAME state here, so
@@ -31,7 +32,9 @@ interface OSContextValue {
 const OSContext = createContext<OSContextValue | null>(null);
 
 export function OSProvider({ children }: { children: ReactNode }) {
-  const { setTheme } = useTheme();
+  const nasaq = useNasaq();
+  // Nasaq has light/dark; map any stored theme id onto it.
+  const setTheme = useCallback((id: string) => nasaq.setTheme(id.startsWith("light") ? "light" : "dark"), [nasaq.setTheme]);
   const [prefs, setPrefs] = useState<DesktopPrefs>(DEFAULT);
   const [loading, setLoading] = useState(true);
   const prefsRef = useRef(prefs);

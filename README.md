@@ -39,8 +39,9 @@ desktop.
 
 ## How it's built
 
-- **Desktop shell** — the [`@togo-framework/ui`](https://github.com/togo-framework/ui)
-  `DesktopShell` / `Window` / `Dock` / `Launchpad` / `Spotlight` components.
+- **Desktop shell** — an app-local `DesktopShell` (`web/src/components/os`: wallpaper,
+  top bar, draggable icons, dock, windows) built on the
+  [Nasaq](https://www.npmjs.com/package/@fadymondy/nasaq) UI kit (`@fadymondy/nasaq`).
 - **Backend** — the [`os`](https://github.com/togo-framework/os) plugin (session +
   app registry) plus `auth`, `settings`, `plugin-host`, `notification-center`.
 - **Apps** — added with `togo make:os-app <name>`; each calls `os.RegisterApp(...)`.
